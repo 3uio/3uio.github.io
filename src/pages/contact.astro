@@ -1,0 +1,46 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { profile } from '../data/site';
+---
+
+<Layout title="Contact · 3uio" description="联系 3uio：GitHub 与个人网站链接。">
+  <div class="page-shell contact-page">
+    <div class="container contact-grid">
+      <header class="page-heading reveal">
+        <p class="eyebrow">CONTACT / 联系</p>
+        <h1>Let’s connect<br />through the work.</h1>
+        <p>目前仅公开 GitHub。其他联系方式在本人确认并提供后再添加。</p>
+      </header>
+
+      <div class="contact-stack">
+        <a class="contact-card" href={profile.github} target="_blank" rel="noopener noreferrer">
+          <span class="contact-index">01</span>
+          <div><span class="contact-label">GITHUB</span><strong>@3uio</strong></div>
+          <span class="contact-arrow" aria-hidden="true">↗</span>
+        </a>
+        <a class="contact-card" href={profile.website}>
+          <span class="contact-index">02</span>
+          <div><span class="contact-label">WEBSITE</span><strong>3uio.github.io</strong></div>
+          <span class="contact-arrow" aria-hidden="true">→</span>
+        </a>
+        <div class="placeholder-note"><strong>未公开：</strong>邮箱、学校、社交媒体等信息没有被虚构或推测。</div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .contact-page { display: grid; align-items: center; min-height: calc(100vh - 137px); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 70px; }
+  .page-heading { margin: 0; }
+  .contact-stack { display: grid; gap: 14px; }
+  .contact-card { display: grid; grid-template-columns: 48px 1fr auto; align-items: center; min-height: 145px; gap: 20px; padding: 24px; border: 1px solid var(--line); border-radius: var(--radius-md); background: rgba(255,255,255,.84); box-shadow: var(--shadow-sm); text-decoration: none; transition: transform 200ms ease, box-shadow 200ms ease; }
+  .contact-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+  .contact-index { color: var(--accent); font-family: var(--font-mono); font-size: .7rem; }
+  .contact-card div { display: grid; }
+  .contact-label { color: var(--ink-faint); font-family: var(--font-mono); font-size: .66rem; letter-spacing: .1em; }
+  .contact-card strong { margin-top: 5px; font-size: 1.35rem; }
+  .contact-arrow { display: grid; width: 40px; height: 40px; place-items: center; border: 1px solid var(--line); border-radius: 50%; color: var(--accent-strong); }
+  @media (max-width: 780px) { .contact-grid { grid-template-columns: 1fr; gap: 40px; } }
+  @media (max-width: 480px) { .contact-card { grid-template-columns: 30px 1fr auto; padding: 18px; } .contact-card strong { font-size: 1rem; } }
+</style>

@@ -1,11 +1,123 @@
 ---
-import Welcome from '../components/Welcome.astro';
+import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import ResearchCard from '../components/ResearchCard.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import PostCard from '../components/PostCard.astro';
+import { profile, projects, researchAreas } from '../data/site';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf())
+  .slice(0, 2);
 ---
 
 <Layout>
-	<Welcome />
+  <Hero />
+
+  <section class="home-intro section-tint">
+    <div class="container intro-grid">
+      <div class="intro-index" aria-hidden="true">01</div>
+      <div>
+        <p class="eyebrow">A SMALL RESEARCH SPACE</p>
+        <h2>把学习变成可以追溯的路径，<br />把想法变成可以验证的工作。</h2>
+      </div>
+      <p class="intro-copy">
+        这里是 3uio 的长期个人主页。我会在这里逐步整理 Research、Projects、Publications 与技术笔记，记录从问题提出到实验实现的过程。
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionTitle
+        eyebrow="RESEARCH INTERESTS"
+        title="正在形成中的研究坐标"
+        description="关注模型能力，也关注内容在真实世界中的安全与可信。以下是当前探索方向，不代表既有科研成果。"
+        linkHref="/research/"
+        linkLabel="研究方向"
+      />
+      <div class="research-grid">
+        {researchAreas.map((area) => <ResearchCard {...area} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="container">
+      <SectionTitle
+        eyebrow="SELECTED WORK"
+        title="Projects · 从问题到实现"
+        description="项目区已经预留 Code、Paper、Demo 与技术栈字段；当前卡片均为结构占位，待真实项目完成后替换。"
+        linkHref="/projects/"
+        linkLabel="全部项目"
+      />
+      <div class="grid-2">
+        {projects.map((project) => <ProjectCard {...project} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionTitle
+        eyebrow="NOTEBOOK"
+        title="Latest Blog / Notes"
+        description="使用 Markdown 记录算法、Python、PyTorch、Git、Linux 与 Research Notes。"
+        linkHref="/blog/"
+        linkLabel="进入 Blog"
+      />
+      <div class="grid-2">
+        {posts.map((post) => <PostCard post={post} compact />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-strip">
+    <div class="container contact-inner">
+      <div>
+        <p class="eyebrow">CONNECT</p>
+        <h2>Follow the work,<br />not the noise.</h2>
+      </div>
+      <div class="contact-copy">
+        <p>目前公开联系方式仅保留 GitHub。项目、笔记与后续研究进展都会在这里持续更新。</p>
+        <div class="button-row">
+          <a class="button button-primary" href={profile.github} target="_blank" rel="noopener noreferrer">Visit GitHub ↗</a>
+          <a class="button button-secondary" href="/contact/">Contact page</a>
+        </div>
+      </div>
+    </div>
+  </section>
 </Layout>
+
+<style>
+  .home-intro { padding: 66px 0; }
+  .intro-grid { display: grid; grid-template-columns: 70px minmax(0, 1.25fr) minmax(260px, 0.75fr); align-items: start; gap: 32px; }
+  .intro-index { color: var(--accent); font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; }
+  .intro-grid h2 { margin-bottom: 0; font-size: clamp(1.8rem, 3.6vw, 2.7rem); font-weight: 680; line-height: 1.4; }
+  .intro-copy { margin: 35px 0 0; color: var(--ink-soft); font-size: 0.98rem; }
+  .research-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 17px; }
+  .contact-strip { padding: 92px 0; color: white; background: var(--navy); }
+  .contact-strip .eyebrow { color: #7dc6d3; }
+  .contact-inner { display: grid; grid-template-columns: 1fr 1fr; align-items: end; gap: 70px; }
+  .contact-inner h2 { margin: 0; font-size: clamp(2.4rem, 5vw, 4.4rem); font-weight: 650; }
+  .contact-copy p { max-width: 550px; margin-bottom: 26px; color: #b8c7d8; }
+  .contact-strip :global(.button-primary) { color: var(--navy); background: white; }
+  .contact-strip :global(.button-secondary) { color: white; border-color: #496077; background: transparent; }
+
+  @media (max-width: 1000px) {
+    .research-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 760px) {
+    .intro-grid { grid-template-columns: 38px 1fr; }
+    .intro-copy { grid-column: 2; margin-top: 0; }
+    .contact-inner { grid-template-columns: 1fr; align-items: start; gap: 35px; }
+  }
+  @media (max-width: 560px) {
+    .research-grid { grid-template-columns: 1fr; }
+    .intro-grid { grid-template-columns: 1fr; }
+    .intro-index { display: none; }
+    .intro-copy { grid-column: auto; }
+  }
+</style>

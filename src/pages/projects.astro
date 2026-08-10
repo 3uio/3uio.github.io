@@ -1,0 +1,56 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { projects } from '../data/site';
+---
+
+<Layout title="Projects · 3uio" description="3uio 的科研与工程项目展示页，预留 Code、Paper、Demo、技术栈与项目详情。">
+  <div class="page-shell">
+    <div class="container">
+      <header class="page-heading reveal">
+        <p class="eyebrow">PROJECTS / 项目</p>
+        <h1>Build, test,<br />learn, document.</h1>
+        <p>项目不只展示结果，也应该保留问题背景、技术决策、个人贡献和复盘。当前项目均为显式占位。</p>
+      </header>
+
+      <div class="project-toolbar" aria-label="项目字段说明">
+        <span>TYPE</span><span>STACK</span><span>CODE</span><span>PAPER</span><span>DEMO</span><span>DETAILS</span>
+      </div>
+      <div class="grid-2 projects-grid">
+        {projects.map((project) => <ProjectCard {...project} />)}
+      </div>
+
+      <aside class="project-guide">
+        <p class="eyebrow">HOW TO UPDATE</p>
+        <h2>新增真实项目时，建议补全这些信息</h2>
+        <ol>
+          <li><span>01</span><strong>Context</strong><p>项目背景、要解决的问题与项目类型。</p></li>
+          <li><span>02</span><strong>Contribution</strong><p>你的具体工作与技术决策，避免只写团队成果。</p></li>
+          <li><span>03</span><strong>Evidence</strong><p>可验证的截图、结果、代码、论文或 Demo。</p></li>
+          <li><span>04</span><strong>Reflection</strong><p>遇到的问题、取舍与后续迭代方向。</p></li>
+        </ol>
+      </aside>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .project-toolbar { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-bottom: 20px; padding: 14px 18px; border: 1px solid var(--line); border-radius: 12px; color: var(--ink-faint); background: rgba(255,255,255,.5); font-family: var(--font-mono); font-size: .65rem; letter-spacing: .08em; }
+  .projects-grid { margin-bottom: 90px; }
+  .project-guide { display: grid; grid-template-columns: .75fr 1.25fr; gap: 30px 70px; padding: 48px; border-radius: var(--radius-lg); color: white; background: var(--navy); }
+  .project-guide .eyebrow { grid-column: 1 / -1; margin: 0; color: #7dc6d3; }
+  .project-guide h2 { margin: 0; font-size: clamp(2rem, 4vw, 3.2rem); }
+  .project-guide ol { margin: 0; padding: 0; list-style: none; }
+  .project-guide li { display: grid; grid-template-columns: 35px 115px 1fr; gap: 13px; padding: 15px 0; border-bottom: 1px solid #30465d; }
+  .project-guide li span { color: #7dc6d3; font-family: var(--font-mono); font-size: .65rem; }
+  .project-guide li strong { font-size: .88rem; }
+  .project-guide li p { margin: 0; color: #aebed0; font-size: .82rem; }
+  @media (max-width: 780px) {
+    .project-guide { grid-template-columns: 1fr; padding: 32px 24px; }
+    .project-guide .eyebrow { grid-column: auto; }
+  }
+  @media (max-width: 520px) {
+    .project-guide li { grid-template-columns: 30px 1fr; }
+    .project-guide li p { grid-column: 2; }
+  }
+</style>

@@ -1,0 +1,96 @@
+---
+import { navLinks, profile } from '../data/site';
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container footer-top">
+    <div class="footer-intro">
+      <p class="footer-label">KEEP EXPLORING</p>
+      <p class="footer-title">在学习、研究与实践之间，持续留下可靠的记录。</p>
+    </div>
+    <nav class="footer-nav" aria-label="页脚导航">
+      {navLinks.slice(1).map((link) => <a href={link.href}>{link.label}</a>)}
+    </nav>
+  </div>
+  <div class="container footer-bottom">
+    <p>© {year} {profile.handle}. Built with Astro.</p>
+    <div class="footer-links">
+      <a href={profile.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+      <a href={profile.website}>3uio.github.io</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--line);
+    background: #eaf0f6;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) 1fr;
+    gap: 50px;
+    padding-block: 64px 48px;
+  }
+
+  .footer-label {
+    margin-bottom: 12px;
+    color: var(--accent-strong);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+  }
+
+  .footer-title {
+    max-width: 600px;
+    margin-bottom: 0;
+    color: var(--navy);
+    font-size: clamp(1.35rem, 3vw, 2rem);
+    font-weight: 680;
+    line-height: 1.4;
+    letter-spacing: -0.03em;
+  }
+
+  .footer-nav {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-content: start;
+    gap: 8px 22px;
+  }
+
+  .footer-nav a,
+  .footer-links a {
+    color: var(--ink-soft);
+    font-size: 0.88rem;
+    text-decoration: none;
+  }
+
+  .footer-nav a:hover,
+  .footer-links a:hover { color: var(--accent-strong); }
+
+  .footer-bottom {
+    display: flex;
+    min-height: 66px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    border-top: 1px solid var(--line-strong);
+  }
+
+  .footer-bottom p {
+    margin: 0;
+    color: var(--ink-faint);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+  }
+
+  .footer-links { display: flex; gap: 20px; }
+
+  @media (max-width: 700px) {
+    .footer-top { grid-template-columns: 1fr; gap: 34px; }
+    .footer-bottom { align-items: flex-start; flex-direction: column; padding-block: 20px; }
+  }
+</style>

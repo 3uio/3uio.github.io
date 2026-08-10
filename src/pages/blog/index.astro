@@ -1,0 +1,73 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import PostCard from '../../components/PostCard.astro';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
+const categories = [...new Set(posts.map((post) => post.data.category))];
+---
+
+<Layout title="Blog & Notes · 3uio" description="3uio 的学习笔记与 Blog：Algorithm、Python、PyTorch、Deep Learning、Git、Linux 与 Research Notes。">
+  <div class="page-shell">
+    <div class="container">
+      <header class="blog-header reveal">
+        <div class="page-heading">
+          <p class="eyebrow">BLOG / 学习笔记</p>
+          <h1>Notes for thinking,<br />not just remembering.</h1>
+          <p>把零散输入整理成可以检索、复用与继续追问的知识。示例文章仅用于验证结构。</p>
+        </div>
+        <div class="blog-stats panel">
+          <div><strong>{String(posts.length).padStart(2, '0')}</strong><span>ENTRIES</span></div>
+          <div><strong>{String(categories.length).padStart(2, '0')}</strong><span>CATEGORIES</span></div>
+        </div>
+      </header>
+
+      <div class="topic-row" aria-label="计划中的文章主题">
+        <span>Topics</span>
+        {['Algorithm', 'Python', 'PyTorch', 'Deep Learning', 'Git', 'Linux', 'Research Notes', 'AI'].map((topic) => <span class="tag">{topic}</span>)}
+      </div>
+
+      <section class="posts-section" aria-labelledby="all-posts">
+        <div class="posts-heading">
+          <h2 id="all-posts">All notes</h2>
+          <span>按发布日期排序</span>
+        </div>
+        <div class="grid-2">
+          {posts.map((post) => <PostCard post={post} />)}
+        </div>
+      </section>
+
+      <aside class="author-guide">
+        <p class="eyebrow">WRITING WORKFLOW</p>
+        <h2>以后新增文章，只需要添加 Markdown 文件。</h2>
+        <p>在 <code>src/content/blog/</code> 中复制一篇示例，修改 frontmatter 和正文；构建时 Astro 会自动生成列表与文章详情页。</p>
+      </aside>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .blog-header { display: grid; grid-template-columns: 1fr 280px; align-items: end; gap: 50px; }
+  .blog-header .page-heading { margin-bottom: 0; }
+  .blog-stats { display: grid; grid-template-columns: 1fr 1fr; padding: 22px; }
+  .blog-stats div { display: grid; gap: 5px; }
+  .blog-stats div + div { padding-left: 20px; border-left: 1px solid var(--line); }
+  .blog-stats strong { color: var(--accent-strong); font-family: var(--font-mono); font-size: 1.5rem; }
+  .blog-stats span { color: var(--ink-faint); font-family: var(--font-mono); font-size: .6rem; letter-spacing: .08em; }
+  .topic-row { display: flex; flex-wrap: wrap; align-items: center; gap: 9px; margin: 54px 0 76px; padding-block: 15px; border-block: 1px solid var(--line-strong); }
+  .topic-row > span:first-child { margin-right: 8px; color: var(--ink); font-family: var(--font-mono); font-size: .7rem; font-weight: 700; text-transform: uppercase; }
+  .posts-heading { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 28px; }
+  .posts-heading h2 { margin: 0; font-size: 1.7rem; }
+  .posts-heading span { color: var(--ink-faint); font-size: .78rem; }
+  .author-guide { margin-top: 80px; padding: 42px; border-radius: var(--radius-lg); color: white; background: var(--navy); }
+  .author-guide .eyebrow { color: #7dc6d3; }
+  .author-guide h2 { max-width: 760px; margin-bottom: 16px; font-size: clamp(1.8rem, 4vw, 3rem); }
+  .author-guide > p:last-child { max-width: 720px; margin: 0; color: #b6c5d5; }
+  .author-guide code { padding: 3px 7px; border-radius: 6px; color: #d7f2f5; background: #18344f; font-family: var(--font-mono); font-size: .86em; }
+  @media (max-width: 760px) {
+    .blog-header { grid-template-columns: 1fr; }
+    .blog-stats { max-width: 320px; }
+  }
+  @media (max-width: 520px) { .author-guide { padding: 30px 22px; } }
+</style>

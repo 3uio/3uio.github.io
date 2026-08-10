@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="404 · Page Not Found · 3uio" description="页面未找到。">
+  <div class="not-found container">
+    <div class="error-code" aria-hidden="true">404</div>
+    <p class="eyebrow">PAGE NOT FOUND</p>
+    <h1>这个坐标暂时没有内容。</h1>
+    <p>页面可能已经移动，或者链接还没有正式建立。</p>
+    <div class="button-row">
+      <a class="button button-primary" href="/">返回 Home</a>
+      <a class="button button-secondary" href="/blog/">浏览 Blog</a>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .not-found { display: grid; min-height: calc(100vh - 137px); align-content: center; justify-items: start; padding-block: 80px; }
+  .error-code { margin-bottom: -28px; color: rgba(23,107,135,.1); font-family: var(--font-mono); font-size: clamp(8rem, 28vw, 18rem); font-weight: 800; line-height: .8; letter-spacing: -.1em; }
+  h1 { margin-bottom: 15px; font-size: clamp(2.2rem, 5vw, 4rem); }
+  .not-found > p:not(.eyebrow) { margin-bottom: 30px; color: var(--ink-soft); }
+</style>

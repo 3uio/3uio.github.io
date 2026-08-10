@@ -1,0 +1,137 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import { profile, researchAreas, skillGroups } from '../data/site';
+---
+
+<Layout title="About · 3uio" description="关于 3uio：个人简介、研究兴趣、技能与后续经历记录。">
+  <div class="page-shell">
+    <div class="container">
+      <header class="page-heading reveal">
+        <p class="eyebrow">ABOUT / 关于我</p>
+        <h1>Curiosity, code,<br />and careful research.</h1>
+        <p>一名持续学习中的 Computer Science 学生，正在通过项目、论文阅读与实验逐步建立自己的研究方向。</p>
+      </header>
+
+      <section class="profile-section">
+        <div class="portrait panel">
+          <img src={profile.avatar} alt="3uio 的 GitHub 头像" width="400" height="400" />
+          <div class="portrait-caption">
+            <span class="status">LEARNING IN PUBLIC</span>
+            <strong>@{profile.handle}</strong>
+          </div>
+        </div>
+        <div class="bio">
+          <p class="eyebrow">PROFILE</p>
+          <h2>关于这个人，也关于这个网站</h2>
+          <p>
+            我是计算机专业学生，目前主要关注 Artificial Intelligence、Deep Learning、Multimedia Security 与 Digital Watermarking。
+          </p>
+          <p>
+            这个网站不是一份静态简历，而是一套长期更新的个人知识与经历档案。Research 用于梳理问题意识，Projects 记录实现过程，Blog 保存可复用的学习笔记，Publications 则为未来真实论文预留位置。
+          </p>
+          <div class="placeholder-note">
+            <strong>信息边界：</strong>学校、真实姓名、年级、邮箱等尚未提供，因此当前不展示，也没有用虚构信息填充。
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <section class="section section-tint">
+    <div class="container">
+      <SectionTitle eyebrow="TIMELINE" title="Education & Experience" description="时间线结构已经准备好，待有真实信息后按时间补充。" />
+      <div class="timeline">
+        <article>
+          <span class="timeline-dot" aria-hidden="true"></span>
+          <p class="timeline-date">CURRENT</p>
+          <div>
+            <h3>Computer Science Learning Journey</h3>
+            <p>正在学习与探索中。具体学校、专业阶段及经历信息待本人补充。</p>
+          </div>
+        </article>
+        <article class="timeline-placeholder">
+          <span class="timeline-dot" aria-hidden="true"></span>
+          <p class="timeline-date">NEXT</p>
+          <div>
+            <h3>未来经历将在这里持续追加</h3>
+            <p>可用于记录科研、课程项目、实习、求学与开源贡献。</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionTitle eyebrow="TOOLBOX" title="Skills · 当前学习栈" description="以下内容描述正在接触的工具与主题，不作熟练度或成果背书。" />
+      <div class="grid-3">
+        {skillGroups.map((group) => (
+          <article class="skill-card panel">
+            <h3>{group.title}</h3>
+            <ul class="tag-list">{group.items.map((item) => <li class="tag">{item}</li>)}</ul>
+            <p>{group.note}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight interests-section">
+    <div class="container interests-grid">
+      <div>
+        <p class="eyebrow">CURRENT INTERESTS</p>
+        <h2>Research direction<br />in progress.</h2>
+      </div>
+      <ol>
+        {researchAreas.map((area) => <li><span>{area.index}</span><strong>{area.title}</strong><em>{area.subtitle}</em></li>)}
+      </ol>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .profile-section { display: grid; grid-template-columns: minmax(290px, 0.75fr) minmax(0, 1.25fr); align-items: center; gap: 78px; }
+  .portrait { overflow: hidden; padding: 15px; }
+  .portrait img { width: 100%; aspect-ratio: 1; border-radius: 15px; object-fit: cover; }
+  .portrait-caption { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 18px 7px 5px; }
+  .portrait-caption strong { font-family: var(--font-mono); font-size: 0.8rem; }
+  .bio h2 { margin-bottom: 24px; font-size: clamp(2rem, 4vw, 3rem); }
+  .bio > p:not(.eyebrow) { color: var(--ink-soft); font-size: 1.03rem; }
+  .bio .placeholder-note { margin-top: 28px; }
+  .timeline { position: relative; max-width: 900px; margin-left: auto; }
+  .timeline::before { position: absolute; top: 15px; bottom: 15px; left: 116px; width: 1px; content: ""; background: var(--line-strong); }
+  .timeline article { position: relative; display: grid; grid-template-columns: 116px 1fr; padding: 8px 0 46px; }
+  .timeline article:last-child { padding-bottom: 0; }
+  .timeline-dot { position: absolute; top: 15px; left: 112px; width: 9px; height: 9px; border: 2px solid var(--bg); border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+  .timeline-date { color: var(--accent-strong); font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; }
+  .timeline article > div { padding-left: 42px; }
+  .timeline h3 { margin-bottom: 9px; font-size: 1.2rem; }
+  .timeline article > div p { margin: 0; color: var(--ink-soft); }
+  .timeline-placeholder { opacity: 0.67; }
+  .skill-card { min-height: 240px; padding: 26px; }
+  .skill-card h3 { margin-bottom: 24px; font-size: 1.15rem; }
+  .skill-card p { margin: 42px 0 0; color: var(--ink-faint); font-size: 0.82rem; }
+  .interests-section { color: white; background: var(--navy); }
+  .interests-section .eyebrow { color: #7dc6d3; }
+  .interests-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 70px; }
+  .interests-grid h2 { margin: 0; font-size: clamp(2.1rem, 4vw, 3.3rem); }
+  .interests-grid ol { margin: 0; padding: 0; list-style: none; }
+  .interests-grid li { display: grid; grid-template-columns: 50px 1fr auto; align-items: center; gap: 16px; padding: 17px 0; border-bottom: 1px solid #30465d; }
+  .interests-grid li span { color: #7dc6d3; font-family: var(--font-mono); font-size: 0.66rem; }
+  .interests-grid li strong { font-size: 1rem; }
+  .interests-grid li em { color: #98aabd; font-size: 0.8rem; font-style: normal; }
+  @media (max-width: 800px) {
+    .profile-section,
+    .interests-grid { grid-template-columns: 1fr; gap: 42px; }
+    .portrait { max-width: 470px; }
+  }
+  @media (max-width: 520px) {
+    .timeline::before { left: 4px; }
+    .timeline article { grid-template-columns: 1fr; padding-left: 28px; }
+    .timeline-dot { left: 0; }
+    .timeline article > div { padding-left: 0; }
+    .interests-grid li { grid-template-columns: 36px 1fr; }
+    .interests-grid li em { grid-column: 2; }
+  }
+</style>
