@@ -30,8 +30,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin)
     <meta name="theme-color" content="#0b2038" />
     <meta name="color-scheme" content="light" />
     <link rel="canonical" href={canonicalURL} />
-    <link rel="icon" type="image/png" href="https://github.com/3uio.png?size=64" />
-    <link rel="alternate icon" href="/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any" />
+    <link rel="icon" type="image/png" href="/favicon.png" sizes="128x128" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
     <meta property="og:type" content={article ? 'article' : 'website'} />
     <meta property="og:site_name" content="3uio" />
     <meta property="og:title" content={title} />

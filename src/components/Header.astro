@@ -8,7 +8,7 @@ const isActive = (href: string) => href === '/' ? pathname === '/' : pathname.st
 <header class="site-header">
   <div class="header-inner container">
     <a class="brand" href="/" aria-label="3uio 首页">
-      <span class="brand-mark" aria-hidden="true">3</span>
+      <img class="brand-mark" src="/favicon.svg" width="34" height="34" alt="" aria-hidden="true" />
       <span class="brand-text">3uio<span class="brand-dot">.</span></span>
     </a>
 
@@ -63,17 +63,15 @@ const isActive = (href: string) => href === '/' ? pathname === '/' : pathname.st
   }
 
   .brand-mark {
-    display: grid;
-    width: 32px;
-    height: 32px;
-    place-items: center;
-    border-radius: 10px;
-    color: white;
-    background: var(--navy);
-    font-family: var(--font-mono);
-    font-size: 0.82rem;
-    font-weight: 800;
-    box-shadow: 0 8px 18px rgba(11, 32, 56, 0.15);
+    width: 34px;
+    height: 34px;
+    flex: none;
+    filter: drop-shadow(0 8px 12px rgba(11, 32, 56, 0.16));
+    transition: transform 180ms ease;
+  }
+
+  .brand:hover .brand-mark {
+    transform: rotate(-4deg) scale(1.04);
   }
 
   .brand-text {
