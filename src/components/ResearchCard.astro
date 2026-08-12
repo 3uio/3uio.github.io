@@ -1,19 +1,20 @@
 ---
 interface Props {
   index: string;
+  category: string;
   title: string;
   subtitle: string;
   description: string;
   topics: string[];
 }
 
-const { index, title, subtitle, description, topics } = Astro.props;
+const { index, category, title, subtitle, description, topics } = Astro.props;
 ---
 
 <article class="research-card">
   <div class="card-top">
     <span class="card-index">{index}</span>
-    <span class="card-arrow" aria-hidden="true">↗</span>
+    <span class="card-category">{category}</span>
   </div>
   <h3>{title}</h3>
   <p class="subtitle">{subtitle}</p>
@@ -57,7 +58,7 @@ const { index, title, subtitle, description, topics } = Astro.props;
 
   .card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 48px; }
   .card-index { color: var(--accent); font-family: var(--font-mono); font-size: 0.76rem; font-weight: 700; }
-  .card-arrow { display: grid; width: 34px; height: 34px; place-items: center; border: 1px solid var(--line); border-radius: 50%; color: var(--ink-soft); }
+  .card-category { padding: 5px 8px; border: 1px solid var(--line); border-radius: 999px; color: var(--ink-faint); font-family: var(--font-mono); font-size: .6rem; letter-spacing: .08em; }
   h3 { margin-bottom: 7px; font-size: 1.35rem; font-weight: 720; }
   .subtitle { margin-bottom: 19px; color: var(--accent-strong); font-size: 0.84rem; font-weight: 700; }
   .description { position: relative; z-index: 1; margin-bottom: 24px; color: var(--ink-soft); font-size: 0.94rem; }

@@ -20,15 +20,7 @@ import Layout from '../layouts/Layout.astro';
         </div>
       </section>
 
-      <section class="schema-section">
-        <p class="eyebrow">ENTRY SCHEMA</p>
-        <h2>为每条论文记录预留的字段</h2>
-        <div class="field-grid">
-          {['Title', 'Authors', 'Venue', 'Year', 'Paper', 'Code', 'Project Page'].map((field, index) => (
-            <div><span>{String(index + 1).padStart(2, '0')}</span><strong>{field}</strong></div>
-          ))}
-        </div>
-      </section>
+      <p class="publication-note">公开项目中的 manuscript 描述不会在这里被自动视为正式 publication。待 Title、Authors、Venue、Year 与 Paper 链接均可公开核验后，再添加条目。</p>
     </div>
   </div>
 </Layout>
@@ -38,14 +30,8 @@ import Layout from '../layouts/Layout.astro';
   .empty-mark { display: grid; width: 110px; height: 110px; place-items: center; border: 1px solid var(--line-strong); border-radius: 50%; color: var(--accent); font-family: Georgia, serif; font-size: 3rem; }
   .empty-state h2 { margin: 18px 0 12px; font-size: clamp(2rem, 4vw, 3rem); }
   .empty-state p { max-width: 600px; margin: 0; color: var(--ink-soft); }
-  .schema-section { margin-top: 90px; }
-  .schema-section h2 { margin-bottom: 30px; font-size: clamp(1.8rem, 3.5vw, 2.6rem); }
-  .field-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line-strong); border-left: 1px solid var(--line-strong); }
-  .field-grid div { display: grid; min-height: 115px; align-content: space-between; padding: 17px; border-right: 1px solid var(--line-strong); border-bottom: 1px solid var(--line-strong); background: rgba(255,255,255,.48); }
-  .field-grid span { color: var(--accent); font-family: var(--font-mono); font-size: .65rem; }
-  .field-grid strong { font-size: .92rem; }
+  .publication-note { max-width: 780px; margin: 28px auto 0; color: var(--ink-faint); font-size: .82rem; text-align: center; }
   @media (max-width: 720px) {
     .empty-state { grid-template-columns: 1fr; gap: 30px; padding: 30px 24px; }
-    .field-grid { grid-template-columns: 1fr 1fr; }
   }
 </style>

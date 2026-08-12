@@ -23,7 +23,7 @@ const isActive = (href: string) => href === '/' ? pathname === '/' : pathname.st
     <a class="header-contact" href="/contact/">Contact <span aria-hidden="true">↗</span></a>
 
     <details class="mobile-menu">
-      <summary aria-label="打开导航菜单"><span></span><span></span></summary>
+      <summary role="button" aria-label="打开导航菜单" aria-expanded="false"><span></span><span></span></summary>
       <nav aria-label="移动端导航">
         {navLinks.map((link) => (
           <a class:list={{ active: isActive(link.href) }} href={link.href} aria-current={isActive(link.href) ? 'page' : undefined}>
@@ -146,7 +146,9 @@ const isActive = (href: string) => href === '/' ? pathname === '/' : pathname.st
   }
 
   .mobile-menu summary::-webkit-details-marker { display: none; }
-  .mobile-menu summary span { display: block; width: 17px; height: 1.5px; background: var(--ink); }
+  .mobile-menu summary span { display: block; width: 17px; height: 1.5px; background: var(--ink); transition: transform 180ms ease; }
+  .mobile-menu[open] summary span:first-child { transform: translateY(3.75px) rotate(45deg); }
+  .mobile-menu[open] summary span:last-child { transform: translateY(-3.75px) rotate(-45deg); }
 
   .mobile-menu nav {
     position: absolute;
@@ -179,3 +181,25 @@ const isActive = (href: string) => href === '/' ? pathname === '/' : pathname.st
     .mobile-menu { display: block; }
   }
 </style>
+
+<script>
+  const menu = document.querySelector<HTMLDetailsElement>('.mobile-menu');
+  const summary = menu?.querySelector('summary');
+  if (menu && summary) {
+    const syncLabel = () => {
+      summary.setAttribute('aria-label', menu.open ? '关闭导航菜单' : '打开导航菜单');
+      summary.setAttribute('aria-expanded', String(menu.open));
+    };
+    menu.addEventListener('toggle', syncLabel);
+    menu.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => menu.removeAttribute('open')));
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && menu.open) {
+        menu.removeAttribute('open');
+        summary.focus();
+      }
+    });
+    document.addEventListener('click', (event) => {
+      if (menu.open && !menu.contains(event.target as Node)) menu.removeAttribute('open');
+    });
+  }
+</script>

@@ -5,7 +5,7 @@ import { profile } from '../data/site';
 <section class="hero">
   <div class="container hero-grid">
     <div class="hero-copy reveal">
-      <p class="hero-kicker"><span aria-hidden="true"></span> CS Student · Research Explorer</p>
+      <p class="hero-kicker"><span aria-hidden="true"></span> CS STUDENT · RESEARCH & ENGINEERING</p>
       <h1>Learning to build<br /><em>reliable intelligence.</em></h1>
       <p class="hero-cn">在代码、模型与可信数字世界之间持续探索。</p>
       <p class="hero-description">{profile.description}</p>
@@ -14,8 +14,8 @@ import { profile } from '../data/site';
         <a class="button button-secondary" href={profile.github} target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
       </div>
       <div class="hero-footnote">
-        <span class="status">OPEN TO LEARNING</span>
-        <span>Based in the digital world</span>
+        <span class="status">LEARNING IN PUBLIC</span>
+        <span>Research · Build · Document</span>
       </div>
     </div>
 
@@ -34,8 +34,8 @@ import { profile } from '../data/site';
         <span>FOCUS</span>
         <strong>AI · DL · SECURITY</strong>
       </div>
-      <span class="coordinate coordinate-one">31.2304° N</span>
-      <span class="coordinate coordinate-two">121.4737° E</span>
+      <span class="coordinate coordinate-one">OPEN SOURCE / 3UIO</span>
+      <span class="coordinate coordinate-two">BUILD · TEST · DOCUMENT</span>
     </div>
   </div>
 </section>
@@ -69,6 +69,14 @@ import { profile } from '../data/site';
   .coordinate { position: absolute; color: var(--ink-faint); font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.08em; }
   .coordinate-one { top: 16px; right: 20px; }
   .coordinate-two { bottom: 24px; left: 32px; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .orbit-one { animation: orbit-drift 14s ease-in-out infinite alternate; }
+    .orbit-two { animation: orbit-drift 18s ease-in-out infinite alternate-reverse; }
+    @keyframes orbit-drift {
+      to { transform: translateX(-50%) rotate(8deg) scale(1.02); }
+    }
+  }
 
   @media (max-width: 960px) {
     .hero { padding-top: 60px; }

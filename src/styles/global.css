@@ -354,6 +354,17 @@ h3 {
       transform: translateY(0);
     }
   }
+
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 560ms ease, transform 560ms ease;
+  }
+
+  .scroll-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (max-width: 900px) {

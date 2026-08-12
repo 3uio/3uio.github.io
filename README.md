@@ -1,46 +1,52 @@
-# Astro Starter Kit: Basics
+# 3uio.github.io
+
+[3uio](https://github.com/3uio) 的个人网站，使用 Astro 构建并部署到 GitHub Pages：<https://3uio.github.io/>。
+
+网站用于长期整理 Research、Projects、Publications 与技术笔记。当前公开项目内容基于 GitHub 仓库整理；未公开的姓名、学校、邮箱、所在地和经历不会被推断或展示。
+
+## 本地开发
+
+需要 Node.js 22.12 或更高版本。
 
 ```sh
-npm create astro@latest -- --template basics
+npm install
+npm run dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+生产构建：
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+```sh
+npm run build
+npm run preview
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## 内容位置
 
-## 🧞 Commands
+- `src/data/site.ts`：个人简介、导航、Research Interests、Projects 与技术栈
+- `src/content/blog/`：Markdown Blog / Notes
+- `src/components/`：页面组件
+- `src/pages/`：路由页面、RSS 与 sitemap
+- `public/`：头像、favicon、Open Graph 图片等静态资源
 
-All commands are run from the root of the project, from a terminal:
+## 新增 Blog
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+在 `src/content/blog/` 新建 Markdown 文件：
 
-## 👀 Want to learn more?
+```yaml
+---
+title: "文章标题"
+description: "用于列表和 SEO 的摘要"
+publishedAt: 2026-08-12
+category: "Research Notes"
+tags: ["PyTorch", "Experiment"]
+featured: false
+draft: true
+isExample: false
+---
+```
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+完成后将 `draft` 改为 `false`。站点会自动生成文章详情页，并同步到 Blog 列表、RSS 和 sitemap。
+
+## Deployment
+
+部署由 `.github/workflows/deploy.yml` 中的 GitHub Actions 工作流完成。请在本地确认 `npm run build` 通过后再自行提交和推送。

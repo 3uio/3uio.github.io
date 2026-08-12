@@ -34,7 +34,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
       <SectionTitle
         eyebrow="RESEARCH INTERESTS"
         title="正在形成中的研究坐标"
-        description="关注模型能力，也关注内容在真实世界中的安全与可信。以下是当前探索方向，不代表既有科研成果。"
+        description="关注模型能力，也关注内容在真实世界中的安全与可信。研究兴趣与公开项目相互关联，但不替代正式成果说明。"
         linkHref="/research/"
         linkLabel="研究方向"
       />
@@ -49,12 +49,12 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
       <SectionTitle
         eyebrow="SELECTED WORK"
         title="Projects · 从问题到实现"
-        description="项目区已经预留 Code、Paper、Demo 与技术栈字段；当前卡片均为结构占位，待真实项目完成后替换。"
+        description="从公开仓库整理出的真实研究代码与工程项目，保留问题、实现、验证和后续迭代的上下文。"
         linkHref="/projects/"
         linkLabel="全部项目"
       />
       <div class="grid-2">
-        {projects.map((project) => <ProjectCard {...project} />)}
+        {projects.slice(0, 2).map((project) => <ProjectCard {...project} />)}
       </div>
     </div>
   </section>

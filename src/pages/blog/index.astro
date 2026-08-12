@@ -15,7 +15,7 @@ const categories = [...new Set(posts.map((post) => post.data.category))];
         <div class="page-heading">
           <p class="eyebrow">BLOG / 学习笔记</p>
           <h1>Notes for thinking,<br />not just remembering.</h1>
-          <p>把零散输入整理成可以检索、复用与继续追问的知识。示例文章仅用于验证结构。</p>
+          <p>把公开项目、论文阅读与实验过程整理成可以检索、复用和继续追问的长期记录。</p>
         </div>
         <div class="blog-stats panel">
           <div><strong>{String(posts.length).padStart(2, '0')}</strong><span>ENTRIES</span></div>
@@ -39,9 +39,9 @@ const categories = [...new Set(posts.map((post) => post.data.category))];
       </section>
 
       <aside class="author-guide">
-        <p class="eyebrow">WRITING WORKFLOW</p>
-        <h2>以后新增文章，只需要添加 Markdown 文件。</h2>
-        <p>在 <code>src/content/blog/</code> 中复制一篇示例，修改 frontmatter 和正文；构建时 Astro 会自动生成列表与文章详情页。</p>
+        <p class="eyebrow">NOTEBOOK PRINCIPLE</p>
+        <h2>Write for the future self.</h2>
+        <p>一篇笔记至少要留下问题、依据、实现与边界。尚未完成或无法核验的内容保留为草稿，不把计划写成成果。</p>
       </aside>
     </div>
   </div>

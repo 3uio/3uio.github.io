@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://3uio.github.io/sitemap.xml
